@@ -33,6 +33,9 @@ def lambda_handler(event, context):
             options={"verify_signature": False}
         )
         user_id = decoded_token['sub']
+        cognito_name = decoded_token['cognito:username']
+        name = decoded_token['name']
+        email = decoded_token['email']
     except Exception as e:
         return {
             "statusCode": 401,
@@ -49,7 +52,12 @@ def lambda_handler(event, context):
     timestamp = datetime.utcnow().isoformat()
 
     retorno = {
-        "userId": user_id,
+        "user": {
+            "userId":user_id,
+            "cognito_name": cognito_name,
+            "name": name,
+            "email": email
+        },
         "videoId": video_id,
         "videoName": nome_arquivo,
         "timestamp": timestamp,
