@@ -52,8 +52,8 @@ def lambda_handler(event, context):
     timestamp = datetime.utcnow().isoformat()
 
     retorno = {
-        "user": {
-            "userId":user_id,
+        "userId":user_id,
+        "user_data": {
             "cognito_name": cognito_name,
             "name": name,
             "email": email
